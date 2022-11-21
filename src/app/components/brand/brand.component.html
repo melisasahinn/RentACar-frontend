@@ -1,0 +1,16 @@
+<div class="bg-secondary text-white btn w-100 mt-1 mb-1"><li 
+    routerLink="/cardetails"
+    [class]="getAllBrandClass()"
+    (click) = "clearCurrentBrand()"
+  >Arabalar</div>
+<ul class="list-group">
+
+  <li 
+    *ngFor="let brand of brands" 
+    routerLink="/cars/brand/{{brand.brandId}}"
+    [class]="getCurrentBrandClass(brand)"
+    (click) = 'setCurrentBrand(brand)'
+  >
+    {{brand.brandName}}
+  </li>
+</ul>

@@ -1,0 +1,38 @@
+<!-- <img src="https://arabam-blog.mncdn.com/wp-content/uploads/2021/05/skoda-fabia-2021.jpg" class="rounded float-start" alt="...">
+
+<img src="https://cumhuriyet.com.tr/Archive/2021/11/29/1888598/kapak_112247.jpg" class="rounded float-end" alt="..."> -->
+<div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Araba Model Ara</label>
+  <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="arama ifadesi giriniz.">
+</div>
+<div *ngIf="filterText.length>2" class="alert alert-dark">
+  {{filterText}} aradınız.
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Araba No</th>
+        <th scope="col">Model</th>
+        <th scope="col">Model Yılı</th>
+        <th scope="col">Renk Kodu</th>
+        <th scope="col">Puan</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let car of carDetails |filterPipe:filterText">
+        <th>{{car.brandId}}</th>
+        <th>{{car.description |uppercase }}</th>
+        <th>{{car.modelYear}}</th>
+        <th>{{car.colorId}}</th>
+        <th>{{car.minFindeksScore}}</th>
+
+        
+
+        <td><img [src]="car.images?.length !== 0 ? imageUrl + car.images[0]:imageUrl" width="131px" height="100px"/></td>
+        <button (click) = "setCurrentCarDetail(car.carId)" class="btn btn-outline-warning"    routerLink = "/cars/detail/{{car.carId}}">Detay</button>
+        <button (click)="addToCart(car)" type="button" class="btn btn-outline-warning" >Kirala</button>
+      </tr>
+      
+    </tbody>
+  </table>
